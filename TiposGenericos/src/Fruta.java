@@ -1,7 +1,7 @@
 
 public class Fruta {
 
-	private String nome;
+	protected String nome;
 
 	public Fruta(String nome) {
 		super();
