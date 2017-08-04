@@ -3,7 +3,7 @@ package classes;
 public class Produto {
 	
 	private String nome;
-	private int valor;
+	private double valor;
 	
 	public Produto(String nome, int valor) {
 		super();
@@ -16,12 +16,23 @@ public class Produto {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public int getValor() {
+	public double getValor() {
 		return valor;
 	}
-	public void setValor(int valor) {
-		this.valor = valor;
+	public void setValor(double d) {
+		this.valor = d;
 	}
+	
+	public void darDesconto( double porcentagem ) {
+		if(porcentagem > 0)
+		  valor = valor * ( (100 - porcentagem) / 100 );
+	}
+	
+	@Override
+	public String toString() {
+		return "Produto [nome=" + nome + ", valor=" + valor + "]";
+	}
+	
 	
 	
 
