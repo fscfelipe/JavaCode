@@ -16,6 +16,11 @@ public class Principal {
 		
 		lista.forEach( p -> System.out.println(p) );
 
+		//Caso só precisemos chamar um método sem parâmetro
+		//podemos fazer da seguinte maneira
+		System.out.println("-------------");
+		lista.forEach( System.out::println);
+		
 	}
 
 }
