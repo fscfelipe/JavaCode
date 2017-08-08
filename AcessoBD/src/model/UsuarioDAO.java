@@ -17,6 +17,26 @@ public class UsuarioDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	public static void inserirUsuario(Usuario u) {
+		
+		try (Connection c = DriverManager.getConnection
+				("jdbc:postgresql://localhost/usuarios", "postgres", "12345")) {
+
+			String sql = "INSERT INTO usuario(login, nome, email) VALUES (?,?,?)";
+			
+			PreparedStatement stmt = c.prepareStatement(sql);
+			stmt.setString(1, u.getLogin());
+			stmt.setString(2, u.getNome());
+			stmt.setString(3, u.getEmail());
+			stmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			throw new RuntimeException("Não foi possível executar o acesso!", e);
+		}
+		
+	}
 
 	public static List<Usuario> todosUsuarios() {
 		List<Usuario> lista = new ArrayList<>();
