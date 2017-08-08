@@ -11,7 +11,7 @@ public class Principal {
 		List<Usuario> lista = UsuarioDAO.todosUsuarios();
 		
 		lista.forEach(System.out::println);
-
+		
 	}
 
 }
