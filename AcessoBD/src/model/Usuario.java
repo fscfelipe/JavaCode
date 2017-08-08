@@ -33,7 +33,7 @@ public class Usuario {
 	
 	@Override
 	public String toString() {
-		return "Ususario [login=" + login + ", nome=" + nome + ", email=" + email + "]";
+		return "Usuario [login=" + login + ", nome=" + nome + ", email=" + email + "]";
 	}
 	
 }
