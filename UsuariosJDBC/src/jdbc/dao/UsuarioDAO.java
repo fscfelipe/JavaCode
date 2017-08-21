@@ -10,7 +10,7 @@ public interface UsuarioDAO {
 	public void inserir(Usuario u);
 	
 	//recupera usuário pelo seu login
-	public void recuperar(String login);
+	public Usuario recuperar(String login);
 	
 	//adiciona pontos para o usuário no banco
 	public void adicionarPontos(String login, int pontos);
