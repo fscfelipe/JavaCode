@@ -76,7 +76,23 @@ public class UsuarioNoBancoDAO implements UsuarioDAO {
 
 	@Override
 	public void adicionarPontos(String login, int pontos) {
-		// TODO Auto-generated method stub
+		
+		try(Connection conn = DriverManager.getConnection
+				("jdbc:postgresql://localhost/coursera", "postgres", "12345")){
+			
+			String sql = "UPDATE usuario SET pontos = pontos + ? WHERE login = ?";
+			
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, pontos);
+			stmt.setString(2, login);
+			
+			stmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			throw new RuntimeException("Não foi possível realizar o acesso!", e);
+		}
+		
+		
 
 	}
 
