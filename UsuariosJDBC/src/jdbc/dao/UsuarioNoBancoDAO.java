@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import jdbc.model.Usuario;
@@ -86,7 +87,7 @@ public class UsuarioNoBancoDAO implements UsuarioDAO {
 			stmt.setInt(1, pontos);
 			stmt.setString(2, login);
 			
-			stmt.executeUpdate();
+			stmt.executeUpdate();	
 			
 		}catch(SQLException e) {
 			throw new RuntimeException("Não foi possível realizar o acesso!", e);
@@ -98,8 +99,38 @@ public class UsuarioNoBancoDAO implements UsuarioDAO {
 
 	@Override
 	public List<Usuario> ranking() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Usuario> lista = new ArrayList<>();
+		
+		
+		try(Connection conn = DriverManager.getConnection
+				("jdbc:postgresql://localhost/coursera", "postgres", "12345")){
+		
+			String sql = "SELECT * FROM usuario ORDER BY pontos DESC";
+			
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				Usuario u = new Usuario();
+				u.setEmail(rs.getString("email"));
+				u.setLogin(rs.getString("login"));
+				u.setNome(rs.getString("nome"));
+				u.setSenha(rs.getString("senha"));
+				u.setPontos(rs.getInt("pontos"));
+				
+				lista.add(u);
+			}
+			
+			stmt.close();
+			rs.close();	
+			
+			return lista;
+			
+		}catch(SQLException e) {
+			throw new RuntimeException("Acesso não foi possível !", e);
+		}
+		
+		
 	}
 
 }
